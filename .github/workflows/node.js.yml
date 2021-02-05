@@ -10,7 +10,7 @@ on:
     branches: [ master ]
 defaults:
   run:
-    working-directory: ../mp3animeocean
+    working-directory: ./workdir
 jobs:
   build:
 
