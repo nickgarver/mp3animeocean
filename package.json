@@ -1,0 +1,50 @@
+{
+  "name": "mp3toanime",
+  "version": "1.0.0",
+  "engines": {
+    "npm": "6.14.10",
+    "node": "14.15.4"
+  },
+  "description": "This project was made by internetboy",
+  "main": "server.js",
+  "scripts": {
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickgarver/mp3toanime.git"
+  },
+  "keywords": [],
+  "author": "internetboy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickgarver/mp3toanime/issues"
+  },
+  "homepage": "https://mp3toanime.herokuapp.com/",
+  "dependencies": {
+    "connect-mongodb-session": "^2.4.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
+    "express-session": "^1.17.1",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-progress-wrapper": "^2.0.1",
+    "find-remove": "^2.0.3",
+    "giphy-api": "^2.0.1",
+    "image-downloader": "^4.0.2",
+    "mongodb": "^3.6.3",
+    "node-cmd": "^4.0.0",
+    "r-json": "^1.2.10",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  }
+}
