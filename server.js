@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 
 //setup mongodb
 var store = new MongoDBStore({
-  uri: process.env.DB_mongoUri,
+  uri: process.env.DB_MONGOURI,
   collection: 'mp3anime'
 });
 
