@@ -131,7 +131,7 @@ app.get('/session', (req, res) => {
       title: "not set",
       search: 'adventure time'
     });
-  } else if (req.session.user === undefined || req.session.jobActive === undefined) {
+  } else if (req.session.user === undefined) {
     // New User or Existing user and no job done before
     req.session.user = req.headers['user-agent'];
     res.json({
@@ -140,7 +140,11 @@ app.get('/session', (req, res) => {
       search: 'adventure time'
     });
   } else {
-    // Existing user with search history
+    if (fs.existsSync(req.session.videoPath) && req.session.progress == 99) {
+      req.session.message = req.session.title + ' is ready!';
+      req.session.progress = 100;
+    }
+    // Existing user with search history or job active
     res.json({
       jobActive: req.session.jobActive,
       title: req.session.title,
@@ -197,10 +201,10 @@ function ffmpegStart(myID,meme,audioPath,gifPath,videoPath) {
     let command = [];
     if (meme === 'true') {
       command = ['-y', '-i', audioPath, '-ignore_loop', '0', '-i',
-      gifPath, '-vf', "amplify=radius=5:factor=30000,hue=s=7:b=4,scale=720:trunc(ow/a/2)*2", '-shortest', '-strict', '-2', '-c:v', 'libx264', '-threads', '6', '-c:a', 'aac', '-b:a', '128k', '-filter_complex', 'stereotools=level_in=15:softclip=1,acompressor=level_in=1:makeup=2,asetrate=44100*1.0,aresample=44100', '-pix_fmt', 'yuv420p', '-crf', '51', '-preset', 'ultrafast', '-profile:v', 'baseline', '-t', '140', '-fs', '50M', videoPath];
+      gifPath, '-vf', "amplify=radius=5:factor=30000,hue=s=7:b=4,scale=720:trunc(ow/a/2)*2", '-shortest', '-strict', '-2', '-c:v', 'libx264', '-threads', '6', '-c:a', 'aac', '-b:a', '128k', '-filter_complex', 'stereotools=level_in=15:softclip=1,acompressor=level_in=1:makeup=2,asetrate=44100*1.0,aresample=44100', '-pix_fmt', 'yuv420p', '-crf', '51', '-preset', 'ultrafast', '-profile:v', 'baseline', videoPath];
     } else {
       command = ['-y', '-i', audioPath, '-ignore_loop', '0', '-i',
-      gifPath, '-vf', "scale=720:trunc(ow/a/2)*2", '-shortest', '-strict', '-2', '-c:v', 'libx264', '-threads', '6', '-c:a', 'aac', '-b:a', '256k', '-pix_fmt', 'yuv420p', '-crf', '28', '-preset', 'faster', '-profile:v', 'baseline', '-t', '140', '-fs', '50M', videoPath]
+      gifPath, '-vf', "scale=720:trunc(ow/a/2)*2", '-shortest', '-strict', '-2', '-c:v', 'libx264', '-threads', '6', '-c:a', 'aac', '-b:a', '256k', '-pix_fmt', 'yuv420p', '-crf', '28', '-preset', 'faster', '-profile:v', 'baseline', videoPath]
     }
     const process = new FFMpegProgress(command);
     process.once('details', (details) => {
@@ -218,6 +222,7 @@ function ffmpegStart(myID,meme,audioPath,gifPath,videoPath) {
     });
 
     process.once('end', (end) => {
+      console.log('ffmpeg end');
       store.get(myID,function(err,session){
         session.message = session.title + ' is ready!';
         session.progress = 100;
