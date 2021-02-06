@@ -106,8 +106,6 @@ app.post('/upload', (req, res) => {
 });
 
 app.get('/progress', (req, res) => {
-  if (res.headersSent) return;
-
   if (req.session.progress === undefined){
     res.json({
       jobActive: true,
