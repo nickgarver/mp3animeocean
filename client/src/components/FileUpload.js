@@ -154,7 +154,7 @@ const FileUpload = () => {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
-      timeout: 5*1000, //seconds
+      timeout: 10*60*1000, //10 min timeout
       onUploadProgress: progressEvent => {
         setMessage('Audio Uploading')
         setPercent(Math.min(50, parseInt(Math.round((progressEvent.loaded * 100 / progressEvent.total) / 2))));
