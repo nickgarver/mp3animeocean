@@ -13,15 +13,6 @@ const app = express();
 const { v4: uuidv4 } = require('uuid');
 const PORT = process.env.PORT || 5000;
 
-//force ssl
-app.use(function(req, res, next) {
-    if (req.get('X-Forwarded-Proto')=='https' || req.hostname == 'localhost') {
-        next();
-    } else if(req.get('X-Forwarded-Proto')!='https'){
-        res.redirect('https://' + req.hostname + req.url);
-    }
-})
-
 //setup mongodb
 var store = new MongoDBStore({
   uri: process.env.DB_mongoUri,
