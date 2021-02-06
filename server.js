@@ -106,18 +106,21 @@ app.post('/upload', (req, res) => {
 });
 
 app.get('/progress', (req, res) => {
+  if (res.headersSent) return;
+
   if (req.session.progress === undefined){
     res.json({
       jobActive: true,
       progress: 50,
       message: "session undefined"
     });
+  } else {
+    res.json({
+      jobActive: req.session.jobActive,
+      progress: req.session.progress,
+      message: req.session.message
+    });
   }
-  res.json({
-    jobActive: req.session.jobActive,
-    progress: req.session.progress,
-    message: req.session.message
-  });
 });
 
 app.get('/session', (req, res) => {

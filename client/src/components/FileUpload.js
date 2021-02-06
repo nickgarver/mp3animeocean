@@ -118,9 +118,6 @@ const FileUpload = () => {
     axios({
       url: '/progress', //your url
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
     }).then((res) => {
       if (res.data.message === 'Video creation error') {
         setPercent(res.data.progress);
