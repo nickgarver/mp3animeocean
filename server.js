@@ -201,10 +201,10 @@ function ffmpegStart(myID,meme,audioPath,gifPath,videoPath) {
     let command = [];
     if (meme === 'true') {
       command = ['-y', '-i', audioPath, '-ignore_loop', '0', '-i',
-      gifPath, '-vf', "amplify=radius=5:factor=30000,hue=s=7:b=4,scale=720:trunc(ow/a/2)*2", '-shortest', '-strict', '-2', '-c:v', 'libx264', '-threads', '6', '-c:a', 'aac', '-b:a', '128k', '-filter_complex', 'stereotools=level_in=15:softclip=1,acompressor=level_in=1:makeup=2,asetrate=44100*1.0,aresample=44100', '-pix_fmt', 'yuv420p', '-crf', '51', '-preset', 'ultrafast', '-profile:v', 'baseline', videoPath];
+      gifPath, '-vf', "amplify=radius=5:factor=30000,hue=s=7:b=4,scale=720:trunc(ow/a/2)*2", '-shortest', '-strict', '-2', '-c:v', 'libx264', '-threads', '12', '-c:a', 'aac', '-b:a', '128k', '-filter_complex', 'stereotools=level_in=15:softclip=1,acompressor=level_in=1:makeup=2,asetrate=44100*1.0,aresample=44100', '-pix_fmt', 'yuv420p', '-crf', '51', '-preset', 'ultrafast', '-profile:v', 'baseline', videoPath];
     } else {
       command = ['-y', '-i', audioPath, '-ignore_loop', '0', '-i',
-      gifPath, '-vf', "scale=720:trunc(ow/a/2)*2", '-shortest', '-strict', '-2', '-c:v', 'libx264', '-threads', '6', '-c:a', 'aac', '-b:a', '256k', '-pix_fmt', 'yuv420p', '-crf', '28', '-preset', 'faster', '-profile:v', 'baseline', videoPath]
+      gifPath, '-vf', "scale=720:trunc(ow/a/2)*2", '-shortest', '-strict', '-2', '-c:v', 'libx264', '-threads', '12', '-c:a', 'aac', '-b:a', '256k', '-pix_fmt', 'yuv420p', '-crf', '28', '-preset', 'faster', '-profile:v', 'baseline', videoPath]
     }
     const process = new FFMpegProgress(command);
     process.once('details', (details) => {

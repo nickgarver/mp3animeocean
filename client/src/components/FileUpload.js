@@ -29,7 +29,7 @@ const FileUpload = () => {
   useLayoutEffect(() => {
     axios.get("/session")
     .then(res => {
-      toast.dark("Welcome to Mp3 Anime. Drop some audio and make a video!");
+      // toast.dark("Welcome to Mp3 Anime. Drop some audio and make a video!");
       if (res.data.jobActive) getData();
       setjobActive(res.data.jobActive);
       setjobTitle(res.data.title);
@@ -85,7 +85,6 @@ const FileUpload = () => {
   const { getRootProps, getInputProps, isDragActive, isDragReject} = useDropzone({
     maxFiles: 1, // number of files,
     accept: "audio/mpeg, audio/m4a, audio/wav, audio/aif, audio/aiff, .m4a, .wav, .mp3, .aiff, .aif",
-    // maxSize: 50000000,
     multiple: false,
     onDropAccepted: (acceptedFile) => {
       setDropped(true);
@@ -121,7 +120,7 @@ const FileUpload = () => {
     }).then((res) => {
       if (res.data.message === 'Video creation error') {
         setPercent(res.data.progress);
-        setMessage('Oops! Video creation error,\nplease try a different file or gif.');
+        setMessage('Oops! Please try a different file or gif.\n Mp3 works best.');
         return;
       }
       setjobActive(res.data.jobActive);
@@ -141,7 +140,7 @@ const FileUpload = () => {
   }
 
   const onSubmit = async e => {
-    toast.dark("Song processing, scroll on twitter and come back like 1 minute.");
+    toast.dark("Song processing, go scroll on twitter or something.");
     setjobActive(true);
     e.preventDefault();
     const formData = new FormData();
@@ -171,6 +170,7 @@ const FileUpload = () => {
   };
 
   const download = async e => {
+    setMessage('Give me a few seconds to download!');
     axios({
       url: '/download', //your url
       method: 'GET',
@@ -178,7 +178,7 @@ const FileUpload = () => {
     })
     .then((res) => {
       if (res.data.message === 'timeout') {
-        setMessage('download failed, try different browser <3');
+        setMessage('Download failed, try different browser <3');
         setPercent(0);
         return;
       }
@@ -215,13 +215,13 @@ const FileUpload = () => {
   return (
     <Fragment>
       <div>
-        <ToastContainer position="top-left"></ToastContainer>
+        <ToastContainer position="top-center" pauseOnFocusLoss={false} toastClassName='discord-color'></ToastContainer>
       </div>
       {!jobActive && <Fragment>
         <div id='file-dropzone' style={{backgroundColor: color}} {...getRootProps({})}>
           <input form="myForm" id='customFile' {...getInputProps()} />
             <label className='custom-file-label' htmlFor="customFile">
-              {!isDragActive && !isDragReject && "Drop audio here!"}
+              {!isDragActive && !isDragReject && "Drop some audio!"}
               {isDragActive && !isDragReject &&  "Drop it like it's hot!"}
               {isDragActive && isDragReject &&   "Please use mp3, wav, or aiff"}
             </label>
@@ -236,9 +236,7 @@ const FileUpload = () => {
           <div className="info-box">
             <form id="myForm" onSubmit={onSubmit} autoComplete="off">
               <h2>
-                  <FontAwesomeIcon className="button-space" icon={faHeart} size="1x"/>
-                  MP3 Anime
-                  <FontAwesomeIcon className="button-space" icon={faHeart} size="1x"/>
+                  MP3 Anime ✨
               </h2>
               <div>
                 <label className="input-label">Title</label>
