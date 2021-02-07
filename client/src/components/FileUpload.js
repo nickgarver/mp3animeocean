@@ -3,7 +3,7 @@ import Progress from './Progress';
 import { useDropzone } from "react-dropzone"
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGrinSquintTears, faArrowUp, faArrowDown, faCompactDisc, faRandom, faHeart, faFire, faSadCry } from '@fortawesome/free-solid-svg-icons'
+import { faGrinSquintTears, faArrowUp, faArrowDown, faCompactDisc, faRandom, faFire, faSadCry } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -236,7 +236,7 @@ const FileUpload = () => {
           <div className="info-box">
             <form id="myForm" onSubmit={onSubmit} autoComplete="off">
               <h2>
-                  MP3 Anime ✨
+                  MP3 Anime <span role="img" aria-label="sparkle">✨</span>
               </h2>
               <div>
                 <label className="input-label">Title</label>
