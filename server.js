@@ -129,7 +129,7 @@ app.get('/session', (req, res) => {
     res.json({
       jobActive: req.session.jobActive,
       title: "not set",
-      search: 'adventure time'
+      search: 'hunter x hunter'
     });
   } else if (req.session.user === undefined) {
     // New User or Existing user and no job done before
