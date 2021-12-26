@@ -30,8 +30,8 @@ const App = () => {
       <div className="footer-socials">
         <a aria-label="Home" href="/"className="site-txt" > MP3 Anime 2021 ©{' '} </a>
         <a aria-label="Twitter" data-tooltip="Report Bug" href="https://twitter.com/internetboysux" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon className="socials-icn" icon={faTwitter} /></a>
-        <a aria-label="Instagram" data-tooltip="Instagram" href="https://instagram.com/internetboy" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon className="socials-icn" icon={faInstagram} /></a>
-        <a aria-label="Support" data-tooltip="Support" href="https://www.buymeacoffee.com/internetboy" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon className="socials-icn" icon={faPaypal} /></a>
+        <a aria-label="Instagram" data-tooltip="Follow me" href="https://instagram.com/internetboy" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon className="socials-icn" icon={faInstagram} /></a>
+        <a aria-label="Support" data-tooltip="Donate" href="https://www.buymeacoffee.com/internetboy" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon className="socials-icn" icon={faPaypal} /></a>
       </div>
     </footer>
   </div>
