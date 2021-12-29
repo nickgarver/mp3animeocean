@@ -1,8 +1,8 @@
 import React, { Suspense, lazy, useState } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
-import { faTimes, faHeart, faMedkit } from '@fortawesome/free-solid-svg-icons'
+import { faTwitter, faInstagram, faPaypal } from '@fortawesome/free-brands-svg-icons'
+import { faTimes, faHeart } from '@fortawesome/free-solid-svg-icons'
 const FileUpload = lazy(() => import('./components/FileUpload'));
 const renderLoader = () => (
   <div className="lds-ellipsis">
